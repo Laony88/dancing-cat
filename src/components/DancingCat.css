@@ -1,0 +1,69 @@
+.dancing-cat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.cat-wrapper {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+}
+
+.cat-wrapper:hover {
+  transform: scale(1.05);
+}
+
+.cat-wrapper:active {
+  transform: scale(0.95);
+}
+
+.cat-image {
+  width: 250px;
+  height: 250px;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.cat-wrapper.dancing .cat-image {
+  animation: dance 2s ease-in-out infinite;
+}
+
+.instruction-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--secondary-color);
+  text-align: center;
+  animation: pulse 2s ease-in-out infinite;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .cat-image {
+    width: 200px;
+    height: 200px;
+  }
+
+  .instruction-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cat-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .instruction-text {
+    font-size: 0.9rem;
+  }
+
+  .dancing-cat-container {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+}

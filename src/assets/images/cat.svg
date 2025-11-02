@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Cat body -->
+  <ellipse cx="100" cy="120" rx="45" ry="55" fill="#ff9a56" stroke="#d97942" stroke-width="2"/>
+
+  <!-- Cat head -->
+  <circle cx="100" cy="70" r="35" fill="#ff9a56" stroke="#d97942" stroke-width="2"/>
+
+  <!-- Left ear -->
+  <path d="M 75 45 L 65 20 L 85 50 Z" fill="#ff9a56" stroke="#d97942" stroke-width="2"/>
+  <path d="M 75 45 L 70 30 L 82 48 Z" fill="#ffb380"/>
+
+  <!-- Right ear -->
+  <path d="M 125 45 L 135 20 L 115 50 Z" fill="#ff9a56" stroke="#d97942" stroke-width="2"/>
+  <path d="M 125 45 L 130 30 L 118 48 Z" fill="#ffb380"/>
+
+  <!-- Left eye -->
+  <ellipse cx="88" cy="68" rx="6" ry="10" fill="#2d3436"/>
+  <ellipse cx="89" cy="65" rx="2" ry="3" fill="white"/>
+
+  <!-- Right eye -->
+  <ellipse cx="112" cy="68" rx="6" ry="10" fill="#2d3436"/>
+  <ellipse cx="113" cy="65" rx="2" ry="3" fill="white"/>
+
+  <!-- Nose -->
+  <path d="M 100 78 L 97 82 L 103 82 Z" fill="#d97942"/>
+
+  <!-- Mouth -->
+  <path d="M 100 82 Q 95 87 90 85" fill="none" stroke="#d97942" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 100 82 Q 105 87 110 85" fill="none" stroke="#d97942" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Whiskers left -->
+  <line x1="70" y1="72" x2="50" y2="70" stroke="#d97942" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="70" y1="77" x2="50" y2="78" stroke="#d97942" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="70" y1="82" x2="50" y2="86" stroke="#d97942" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Whiskers right -->
+  <line x1="130" y1="72" x2="150" y2="70" stroke="#d97942" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="130" y1="77" x2="150" y2="78" stroke="#d97942" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="130" y1="82" x2="150" y2="86" stroke="#d97942" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Front left leg -->
+  <rect x="75" y="160" width="12" height="35" rx="6" fill="#ff9a56" stroke="#d97942" stroke-width="2"/>
+  <ellipse cx="81" cy="195" rx="8" ry="5" fill="#ffb380"/>
+
+  <!-- Front right leg -->
+  <rect x="113" y="160" width="12" height="35" rx="6" fill="#ff9a56" stroke="#d97942" stroke-width="2"/>
+  <ellipse cx="119" cy="195" rx="8" ry="5" fill="#ffb380"/>
+
+  <!-- Back left leg -->
+  <rect x="85" y="165" width="10" height="25" rx="5" fill="#e8864d" stroke="#d97942" stroke-width="1.5"/>
+
+  <!-- Back right leg -->
+  <rect x="105" y="165" width="10" height="25" rx="5" fill="#e8864d" stroke="#d97942" stroke-width="1.5"/>
+
+  <!-- Tail -->
+  <path d="M 145 130 Q 170 120 175 100 Q 178 85 170 75" fill="none" stroke="#ff9a56" stroke-width="14" stroke-linecap="round"/>
+  <path d="M 145 130 Q 170 120 175 100 Q 178 85 170 75" fill="none" stroke="#d97942" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Belly spot -->
+  <ellipse cx="100" cy="135" rx="25" ry="30" fill="#ffb380" opacity="0.6"/>
+</svg>
