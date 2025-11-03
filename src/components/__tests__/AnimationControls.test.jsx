@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import AnimationControls from './AnimationControls'
+import AnimationControls from '../AnimationControls'
 
 describe('AnimationControls', () => {
   it('renders both dance and cry buttons', () => {
