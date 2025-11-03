@@ -32,6 +32,11 @@
   animation: dance 2s ease-in-out infinite;
 }
 
+.cat-wrapper.crying .cat-image {
+  animation: cry 1.5s ease-in-out infinite;
+  opacity: 0.9;
+}
+
 .instruction-text {
   font-size: 1.2rem;
   font-weight: 500;

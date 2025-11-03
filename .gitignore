@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Test coverage
+coverage
+
 # gh-pages cache prevention
 node_modules/.cache/
 .cache/
