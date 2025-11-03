@@ -1,0 +1,80 @@
+요약
+- 전반적으로 기능은 명확하고 가독성도 괜찮습니다. 다만 클린 코드, 성능, 유지보수성 측면에서 개선할 수 있는 부분들이 있어 권장사항을 남깁니다.
+
+파일: src/App.jsx
+1) 상태 업데이트 안정성 및 핸들러 메모이제이션
+- 문제: setIsAnimating(!isAnimating) / setIsCrying(!isCrying)처럼 현재 상태를 직접 참조해서 토글하면 스테일(stale) 값 이슈가 발생할 수 있습니다. 또한 핸들러가 매 렌더마다 새로 생성되어 자식 컴포넌트의 불필요한 재렌더를 유발합니다.
+- 권장: 함수형 업데이트와 useCallback 사용
+  예:
+    const handleToggleAnimation = useCallback(() => {
+      setIsAnimating(prev => !prev)
+      setIsCrying(false)
+    }, [])
+
+    const handleToggleCrying = useCallback(() => {
+      setIsCrying(prev => !prev)
+      setIsAnimating(false)
+    }, [])
+- 이유: 안정적인 상태 전환과 자식 컴포넌트 렌더 최적화.
+
+2) 상태 모델 단일화(권장)
+- 문제: dancing / crying을 각각 boolean으로 관리하면 상호배타 로직이 분산되어 확장 시 버그를 유발할 수 있습니다.
+- 권장: 하나의 enum-like 상태로 관리 (예: mode = 'idle' | 'dancing' | 'crying')
+  예:
+    const [mode, setMode] = useState('idle')
+    const toggleDancing = useCallback(() => setMode(prev => prev === 'dancing' ? 'idle' : 'dancing'), [])
+    const toggleCrying = useCallback(() => setMode(prev => prev === 'crying' ? 'idle' : 'crying'), [])
+- 이유: 상태 전이가 명확해지고 유지보수성이 좋아집니다.
+
+파일: src/components/DancingCat.jsx
+3) prop 네이밍 일관성
+- 문제: App에서는 onToggleDancing 같은 이름을 쓰는데, DancingCat은 onToggle으로 받고 있어 혼동 소지 있습니다.
+- 권장: App과 자식 컴포넌트 간에 prop 이름을 통일하세요 (예: onToggleDancing / onToggleCrying 또는 onToggle).
+
+4) 퍼포먼스 최적화(React.memo)
+- 권장: React.memo로 컴포넌트를 감싸 불필요한 재렌더를 막으세요. 필요하면 커스텀 비교함수 사용.
+  예:
+    export default React.memo(DancingCat, (prev, next) => prev.mode === next.mode)
+
+5) 접근성(alt, 키보드 액세스)
+- 권장:
+  - <img alt>을 상황에 맞게 추가: alt={isCrying ? '울고 있는 고양이' : '춤추는 고양이'}
+  - 클릭 가능한 div에는 role="button", tabIndex 및 onKeyDown으로 키보드 접근성 제공 고려.
+
+6) 클래스 네이밍 개선
+- 권장: classnames/clsx 사용으로 조건부 클래스 조합 간결화.
+
+파일: src/components/AnimationControls.jsx
+7) props 및 aria 개선
+- 권장:
+  - props 이름을 onToggleDancing / onToggleCrying 등으로 통일
+  - 버튼에 aria-pressed={isAnimating} 또는 aria-pressed={isCrying} 추가
+  - keyboard 접근성(focus 스타일, 키보드 조작) 확인
+
+8) React.memo 적용 권장
+- AnimationControls도 React.memo로 감쌀 것을 권장합니다.
+
+파일: src/components/DancingCat.css 및 src/styles/animations.css
+9) prefers-reduced-motion 적용(접근성)
+- 권장: 사용자가 모션을 줄이도록 설정한 경우 애니메이션을 비활성화하세요.
+  예:
+    @media (prefers-reduced-motion: reduce) {
+      .cat-wrapper.dancing .cat-image,
+      .cat-wrapper.crying .cat-image { animation: none !important; }
+    }
+
+10) CSS 구조/유지보수
+- 권장:
+  - 애니메이션 키프레임은 한 곳(예: animations.css)으로 모으고 컴포넌트별 스타일은 컴포넌트 파일에 유지
+  - 상태 표현에 data-state 속성을 사용하는 방식 고려: .cat-wrapper[data-state="dancing"] 등
+
+일반적인 권장사항
+11) PropTypes 또는 TypeScript로 props 타입 명시 권장
+12) 테스트 추가 권장: 버튼 클릭 시 상태 전환, 렌더 결과(클래스/텍스트), prefers-reduced-motion 동작 등
+
+작은 nit
+- 버튼 텍스트에 이모지 사용은 괜찮지만 스크린리더를 위해 aria-label이 충분히 설명적인지 확인하세요.
+- 코드 주석 언어 통일 (팀 규칙에 따라 영어 권장)
+- AnimationControls.css에 추가한 dance-button / cry-button 스타일이 실제로 존재하는지 확인하세요.
+
+전반적으로 좋은 구현입니다. 위 권장사항 중 간단한 변경(예: useCallback + functional setState, aria-pressed 추가 등)을 우선 적용하면 안정성과 성능, 접근성 모두 개선됩니다. 원하시면 제가 (1) 간단 개선만 적용한 패치 또는 (2) mode 기반 리팩토링 패치를 만들어 드릴 수 있습니다.
